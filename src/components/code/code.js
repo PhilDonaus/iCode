@@ -30,10 +30,16 @@ class Code extends Component {
     render(){
         return(
     <div>
-        <textarea id="html" placeholder="HTML"></textarea>
-        <textarea id="css" placeholder="CSS"></textarea>
-        <textarea id="js" placeholder="JavaScript"></textarea>
-        <iframe id="code"></iframe>
+        <div className="row">
+            <div className="col s6">
+                <textarea id="html" placeholder="HTML"></textarea>
+                <textarea id="css" placeholder="CSS"></textarea>
+                <textarea id="js" placeholder="JavaScript"></textarea>
+            </div>
+            <div className="col s6">
+                <iframe id="code"></iframe>
+            </div>
+        </div>
     </div>
     )
 }
