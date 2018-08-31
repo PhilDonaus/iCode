@@ -13,7 +13,7 @@ class Code extends Component {
         var js = document.getElementById("js");
         var code = document.getElementById("code").contentWindow.document;
       
-        document.body.onkeyup = function() {
+        document.body.onkeyup = () => {
           code.open();
           code.writeln(
             html.value +
