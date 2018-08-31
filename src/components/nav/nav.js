@@ -4,7 +4,7 @@ class Nav extends Component {
     render() {
       return (
       <div>
-      <h1>Nav</h1>
+      <p>Navbar</p>
       </div>
       )
     }

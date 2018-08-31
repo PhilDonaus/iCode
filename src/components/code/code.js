@@ -32,9 +32,15 @@ class Code extends Component {
     <div>
         <div className="row">
             <div className="col s6">
-                <textarea id="html" placeholder="HTML"></textarea>
-                <textarea id="css" placeholder="CSS"></textarea>
-                <textarea id="js" placeholder="JavaScript"></textarea>
+                <div className="row">
+                    <textarea id="html" placeholder="HTML"></textarea>
+                </div>
+                <div className="row">
+                    <textarea id="css" placeholder="CSS"></textarea>
+                </div>
+                <div className="row">
+                    <textarea id="js" placeholder="JavaScript"></textarea>
+                </div>
             </div>
             <div className="col s6">
                 <iframe id="code"></iframe>
