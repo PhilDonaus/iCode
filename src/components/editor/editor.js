@@ -14,7 +14,9 @@ export default class Editor extends Component {
     this.onChangeHTML = this.onChangeHTML.bind(this);
     this.onChangeCSS = this.onChangeCSS.bind(this);
     this.onChangeJS = this.onChangeJS.bind(this);
-    this.state = {html:`<!DOCTYPE html>
+    this.onComponentView = this.onComponentView.bind(this);
+    this.state = {
+      html:`<!DOCTYPE html>
 <html>
     <head>
         <title>I Can Code!</title>
@@ -25,54 +27,51 @@ export default class Editor extends Component {
         <button onclick={go()}>Do This</button>
     </body>
 </html>`,
-                  css:`body {color:blue}`,
-                  js: `function go(){alert("i've loaded!!");}`}
+      css:`body {color:blue}`,
+      js: `function go(){alert("i've loaded!!");}`}
   }
   
   onChangeHTML(newValue) {
     this.setState({html:newValue});
-    
     console.log(newValue);
   }
   onChangeCSS(newValue) {
     this.setState({css:newValue});
-    
     console.log(newValue);
   }
   onChangeJS(newValue) {
     this.setState({js:newValue});
-    
     console.log(newValue);
   }
   
   onComponentView(page) {
-    if (page.type == 'html'){
+    if (page == 'html'){
       return(
         <div>
           <CodeIDE
-            mycode={page.html}
-            onChange={page.onChangeHTML}
+            mycode={this.state.html}
+            onChange={this.onChangeHTML}
             mymode={'html'}/>
         </div>
       );
     }
-    if (page.type == 'css'){
+    if (page == 'css'){
       return(
         <div>
           <CodeIDE 
-            mycode={page.css}
+            mycode={this.state.css}
             onChange={this.onChangeCSS}
             mymode={'css'}
             />
         </div>
       )
     }
-    if (page.type == 'js'){
+    if (page == 'js'){
       return(
         <div>
           <CodeIDE 
-            mycode={page.css}
-            onChange={this.onChangeCSS}
+            mycode={this.state.js}
+            onChange={this.onChangeJS}
             mymode={'css'}
             />
         </div>
@@ -87,21 +86,7 @@ export default class Editor extends Component {
     return(
       <div className="row">
         <div className="col">
-          <CodeIDE 
-            mycode={this.state.html}
-            onChange={this.onChangeHTML}
-            mymode={'html'}
-            />
-          <CodeIDE 
-            mycode={this.state.css}
-            onChange={this.onChangeCSS}
-            mymode={'css'}
-            />
-          <CodeIDE 
-            mycode={this.state.js}
-            onChange={this.onChangeJS}
-            mymode={'javascript'}
-            />
+          {this.onComponentView('js')}
         </div>
         <div className="col">
           <RenderDisplay
@@ -144,7 +129,6 @@ class CodeIDE extends Component {
 	);
   };
 }
-
 
 class RenderDisplay extends Component {
   componentDidMount(){
