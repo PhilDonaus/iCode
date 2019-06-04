@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
     <div>
-    	<Editor thecode={'console.log("Hi!");'}/>
+    	<Editor/>
     </div>
     );
   }
