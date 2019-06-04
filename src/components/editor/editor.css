@@ -2,4 +2,8 @@
   border:solid #0072b4 10px;
 }
 
-iframe {border: solid white 0px;}
+iframe {
+  border: solid white 0px;
+  height:80vh;
+  width: 100%;
+}

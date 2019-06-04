@@ -21,12 +21,14 @@ export default class Editor extends Component {
     </head>
     <body>
         <h1>Hi There! I can Code!</h1>
-        <p class="light">See I can do it with a hilighter</p>
+        <p class="light">See I can do it with this works</p>
+        <button onclick={go()}>Do This</button>
     </body>
 </html>`,
                   css:`body {color:blue}`,
-                  js: `function onLoad(editor){ console.log("i've loaded!!");}`}
+                  js: `function go(){alert("i've loaded!!");}`}
   }
+  
   onChangeHTML(newValue) {
     this.setState({html:newValue});
     
@@ -41,6 +43,44 @@ export default class Editor extends Component {
     this.setState({js:newValue});
     
     console.log(newValue);
+  }
+  
+  onComponentView(page) {
+    if (page.type == 'html'){
+      return(
+        <div>
+          <CodeIDE
+            mycode={page.html}
+            onChange={page.onChangeHTML}
+            mymode={'html'}/>
+        </div>
+      );
+    }
+    if (page.type == 'css'){
+      return(
+        <div>
+          <CodeIDE 
+            mycode={page.css}
+            onChange={this.onChangeCSS}
+            mymode={'css'}
+            />
+        </div>
+      )
+    }
+    if (page.type == 'js'){
+      return(
+        <div>
+          <CodeIDE 
+            mycode={page.css}
+            onChange={this.onChangeCSS}
+            mymode={'css'}
+            />
+        </div>
+      )
+    }
+    else{
+      return(<h1>Nothing Found</h1>)
+    }
   }
   
   render(){
@@ -81,7 +121,7 @@ class CodeIDE extends Component {
       <div>
           <AceEditor
             placeholder="Placeholder Text"
-            height="100vh"
+            height="80vh"
             width="100%"
             mode={this.props.mymode}
             theme="monokai"
