@@ -3,3 +3,47 @@ body {
   padding: 0;
   font-family: "Raleway",sans-serif;
 }
+
+iframe {
+  height:100%;
+  width:100%;
+  display:inline;
+  border: solid white 2px;
+}
+
+
+.ide {
+  padding:0;
+  margin:0;
+}
+
+.ide Row {
+  padding:0;
+  margin:0;
+}
+
+
+.displaycode {
+  height:100%;
+}
+
+.nav-item {
+  color:white;
+  background-color: black;
+}
+
+.nav-item active{
+  border: solid black 1px;
+  color:black;
+  background-color:white;
+}
+
+a {
+  color:white;
+  text-decoration: none;
+}
+
+a :hover {
+  color:black;
+  background-color:white;
+}

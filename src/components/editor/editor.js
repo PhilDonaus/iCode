@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+
+
  
 import 'brace/mode/java';
 import 'brace/mode/html';
@@ -15,90 +17,99 @@ export default class Editor extends Component {
     this.onChangeCSS = this.onChangeCSS.bind(this);
     this.onChangeJS = this.onChangeJS.bind(this);
     this.onComponentView = this.onComponentView.bind(this);
+    
     this.state = {
-      html:`<!DOCTYPE html>
-<html>
-    <head>
-        <title>I Can Code!</title>
-    </head>
-    <body>
-        <h1>Hi There! I can Code!</h1>
-        <p class="light">See I can do it with this works</p>
-        <button onclick={go()}>Do This</button>
-    </body>
-</html>`,
-      css:`body {color:blue}`,
-      js: `function go(){alert("i've loaded!!");}`}
+      html:``,
+      css:``,
+      js: ``,
+      viewData:'js'};
   }
   
   onChangeHTML(newValue) {
-    this.setState({html:newValue});
-    console.log(newValue);
+    this.setState({html:newValue,viewData:'html'});
   }
+  
   onChangeCSS(newValue) {
-    this.setState({css:newValue});
-    console.log(newValue);
+    this.setState({css:newValue,viewData:'css'});
   }
+  
   onChangeJS(newValue) {
-    this.setState({js:newValue});
-    console.log(newValue);
+    this.setState({js:newValue,viewData:'js'});
   }
   
   onComponentView(page) {
     if (page == 'html'){
       return(
-        <div>
-          <CodeIDE
-            mycode={this.state.html}
-            onChange={this.onChangeHTML}
-            mymode={'html'}/>
+        <div className="row">
+          <div className="col">
+            <CodeIDE 
+              mycode={this.state.html}
+              onChange={this.onChangeHTML}
+              mymode={'html'}
+              />
+          </div>
+          <div className="col">
+            <RenderDisplay
+              htmlData={this.state.html}
+              cssData={this.state.css}
+              jsData={this.state.js}
+              />
+          </div>
         </div>
       );
     }
     if (page == 'css'){
       return(
-        <div>
-          <CodeIDE 
-            mycode={this.state.css}
-            onChange={this.onChangeCSS}
-            mymode={'css'}
-            />
+        <div className="row">
+          <div className="col">
+            <CodeIDE 
+              mycode={this.state.css}
+              onChange={this.onChangeCSS}
+              mymode={'css'}
+              />
+          </div>
+          <div className="col">
+            <RenderDisplay
+              htmlData={this.state.html}
+              cssData={this.state.css}
+              jsData={this.state.js}
+              />
+          </div>
         </div>
       )
     }
     if (page == 'js'){
       return(
-        <div>
-          <CodeIDE 
-            mycode={this.state.js}
-            onChange={this.onChangeJS}
-            mymode={'css'}
-            />
+        <div className="row">
+          <div className="col">
+            <CodeIDE 
+              mycode={this.state.js}
+              onChange={this.onChangeJS}
+              mymode={'javascript'}
+              />
+          </div>
+          <div className="col">
+            <RenderDisplay
+              htmlData={this.state.html}
+              cssData={this.state.css}
+              jsData={this.state.js}
+              />
+          </div>
         </div>
-      )
+      );
     }
     else{
-      return(<h1>Nothing Found</h1>)
+      return(<h1>Sorry, no Data</h1>);
     }
   }
   
   render(){
     return(
-      <div className="row">
-        <div className="col">
-          {this.onComponentView('js')}
-        </div>
-        <div className="col">
-          <RenderDisplay
-            htmlData={this.state.html}
-            cssData={this.state.css}
-            jsData={this.state.js}
-            />
-          </div>
-      </div>)
+      <div>
+          {this.onComponentView(this.state.viewData)}
+      </div>);
   };
 }
-
 
 class CodeIDE extends Component {
 	render(){
@@ -131,6 +142,7 @@ class CodeIDE extends Component {
 }
 
 class RenderDisplay extends Component {
+  
   componentDidMount(){
     this.compile();
   }
@@ -148,13 +160,13 @@ class RenderDisplay extends Component {
           `</script>`
       );
       code.close();
-    };
+    }
   }
   render(){
       return(
           <div className="displayCode">
               <iframe id="displaycase"></iframe>
           </div>
-  );
+      );
   }
 }
