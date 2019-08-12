@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Tab, Nav, Row, Col, TabContainer } from 'react-bootstrap';
 import AceEditor from 'react-ace';
+import axios from 'axios';
+
 
 import 'brace/mode/java';
 import 'brace/mode/html';
 import 'brace/theme/monokai';
 import './index.css';
+
+const API_URL = 'http://localhost:8000';
+
+
 
 
 export default class App extends Component {
@@ -35,6 +41,9 @@ export default class App extends Component {
   }
   
 }
+
+
+
 class Pagination extends Component {
   constructor(props, context) {
     super(props,context);
